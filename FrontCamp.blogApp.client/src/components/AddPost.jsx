@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import uuid from 'uuid';
+import { connect } from 'react-redux';
 
 class AddPost extends Component {
   constructor(props) {
@@ -20,6 +20,8 @@ class AddPost extends Component {
   }
 
   handleSubmit(e) {
+    e.preventDefault();
+
     const title = this.state.title;
     const text = this.state.text;
     let tagsSet = [];
@@ -28,7 +30,6 @@ class AddPost extends Component {
     }
 
     const createdPost = {
-      id: uuid.v4(),
       title,
       text,
       tags: [...tagsSet],
@@ -37,7 +38,6 @@ class AddPost extends Component {
     };
 
     this.props.addPost(createdPost);
-    e.preventDefault();
   }
 
   render() {
@@ -76,5 +76,6 @@ class AddPost extends Component {
   }
 }
 
+AddPost = connect()(AddPost);
 
 export default AddPost;

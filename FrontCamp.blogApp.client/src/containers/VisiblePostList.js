@@ -1,16 +1,17 @@
 import { connect } from 'react-redux'
+import TodoList from '../components/PostList.jsx';
 
 const mapDispatchToProps = dispatch => {
   return {
-    onTodoClick: id => {
-      dispatch(toggleTodo(id))
-    }
+    // onTodoClick: id => {
+    //   dispatch(toggleTodo(id))
+    // }
   }
 };
 
 const mapStateToProps = state => {
   return {
-    todos: getVisibleTodos(state.todos, state.visibilityFilter)
+    posts: state.posts
   }
 };
 

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
-import PostList from '../PostList.jsx';
+import VisiblePostList from '../../containers/VisiblePostList';
 import SearchBar from '../SearchBar.jsx';
-import AddPost from '../AddPost.jsx';
+import AddPostContainer from '../../containers/AddPostContainer'
 import EditAuthor from '../EditAuthor.jsx';
 
 class App extends Component {
@@ -17,20 +17,9 @@ class App extends Component {
       isPostAddBtnDisabled: false
     };
 
-    this.handleAddPost = this.handleAddPost.bind(this);
     this.onPostDelete = this.onPostDelete.bind(this);
     this.onFilterTextChange = this.onFilterTextChange.bind(this);
     this.handleAuthorChange = this.handleAuthorChange.bind(this);
-    this.handlePostAddClick = this.handlePostAddClick.bind(this);
-    this.handleCancelClick = this.handleCancelClick.bind(this);
-  }
-
-  handleAddPost(post) {
-    this.setCreateMode(false);
-    this.setState(prev => {
-      prev.posts.push(post);
-      return { posts: prev.posts };
-    });
   }
 
   onPostDelete(postId) {
@@ -53,18 +42,6 @@ class App extends Component {
   handleAuthorChange(author) {
     const isPostAddBtnDisabled = author == null || author === '';
     this.setState({author: author, isPostAddBtnDisabled: isPostAddBtnDisabled});
-  }
-
-  handlePostAddClick() {
-    this.setCreateMode(true);
-  }
-
-  handleCancelClick() {
-    this.setCreateMode(false);
-  }
-
-  setCreateMode(isCreateMode) {
-    this.setState(prev => ({isCreateMode: isCreateMode}));
   }
 
   render() {
@@ -92,8 +69,8 @@ class App extends Component {
               </div>
             </div>
             <div className="col s8 offset-s1">
-              {!this.state.isCreateMode && <PostList posts={filteredPosts} onPostDelete={this.onPostDelete} />}
-              {this.state.isCreateMode && <AddPost author ={this.state.author} addPost={this.handleAddPost} onCancelClick={this.handleCancelClick} />}
+              <VisiblePostList/>
+              <AddPostContainer/>
             </div>
           </div>
         </main>
