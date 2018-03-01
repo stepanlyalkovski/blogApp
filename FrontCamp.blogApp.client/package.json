@@ -4,6 +4,8 @@
   "description": "FrontCamp reactjs tasks",
   "main": "index.js",
   "dependencies": {
+    "cross-fetch": "^2.0.0",
+    "express": "^4.16.2",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.7",

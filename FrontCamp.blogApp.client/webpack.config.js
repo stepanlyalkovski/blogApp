@@ -32,5 +32,14 @@ module.exports = {
     ]
   },
   plugins: [HtmlWebpackPluginConfig],
-  devtool: 'inline-source-map'
-}
+  devtool: 'inline-source-map',
+  devServer: {
+    contentBase: path.join(__dirname, "dist"),
+    compress: true,
+    historyApiFallback: true,
+    proxy: {
+      "/api": "http://localhost:3000"
+    },
+    port: 3001
+  }
+};
