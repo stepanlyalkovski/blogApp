@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import TodoList from '../components/PostList.jsx';
+import PostList from '../components/PostList.jsx';
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -18,6 +18,6 @@ const mapStateToProps = state => {
 const VisiblePostList = connect(
   mapStateToProps,
   mapDispatchToProps
-)(TodoList);
+)(PostList);
 
 export default VisiblePostList

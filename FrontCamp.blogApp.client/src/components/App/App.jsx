@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import './App.css';
 import VisiblePostList from '../../containers/VisiblePostList';
 import SearchBar from '../SearchBar.jsx';
+
 import AddPostContainer from '../../containers/AddPostContainer'
 import EditAuthor from '../EditAuthor.jsx';
+import SearchablePostList from '../FilterablePostList.jsx';
 
 class App extends Component {
   constructor() {
@@ -45,8 +48,6 @@ class App extends Component {
   }
 
   render() {
-    const filteredPosts = this.filterPosts(this.state.posts, this.state.filterText);
-
     return (
       <div>
         <nav className=" grey darken-3" role="navigation">
@@ -56,22 +57,9 @@ class App extends Component {
         <main className="container">
           <h1 className="header center">Blog application</h1>
           <div className="row app-content">
-            <div className="col s3">
-              <div className="card-panel">
-                <EditAuthor author ={this.state.author} onAuthorChange={this.handleAuthorChange}/>
-                <SearchBar filterText={this.state.filterText} onFilterTextChange={this.onFilterTextChange} />
-                <div className="row">
-                  <div className="col s12">
-                    Total items: {filteredPosts.length}
-                  </div>
-                </div>
-                {!this.state.isCreateMode && <button className="waves-effect waves-light btn" onClick={this.handlePostAddClick} disabled={this.state.isPostAddBtnDisabled}>Add Post</button>}
-              </div>
-            </div>
-            <div className="col s8 offset-s1">
-              <VisiblePostList/>
-              <AddPostContainer/>
-            </div>
+            <Router>
+              <Route path="/" component={SearchablePostList}/>
+            </Router>
           </div>
         </main>
       </div>
