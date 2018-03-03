@@ -1,10 +1,12 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const blogRouter = require('./blogRouter');
+const authRouter = require('./authRouter');
 const fs = require( 'fs' );
 const winston = require('winston');
 const path = require('path');
 const mongoose = require('mongoose');
+const jwt = require('jsonwebtoken');
 
 let port = 3000;  
 
@@ -35,7 +37,17 @@ function configureApp() {
   app.use(bodyParser.json());
   
   app.use(logRequest);
-  app.use('/blogs', blogRouter);
+  app.use('/api', authRouter);
+  app.all('/api/*', parseToken, (req, res, next) => {
+      jwt.verify(req.token, 'secretkey', (err, authData) => {
+      if(err) {
+        res.sendStatus(403);
+      } else {
+        next();
+      }
+    });
+  })
+  app.use('/api/blogs', blogRouter);
   app.use(handleUnknownRoute);
   app.use(logErrors);
   app.use(clientErrorHandler);
@@ -82,4 +94,24 @@ function createLogger() {
   });
 
   return logger;
+}
+
+function parseToken(req, res, next) {
+  // Get auth header value
+  const bearerHeader = req.headers['authorization'];
+  // Check if bearer is undefined
+  if(typeof bearerHeader !== 'undefined') {
+    // Split at the space
+    const bearer = bearerHeader.split(' ');
+    // Get token from array
+    const bearerToken = bearer[1];
+    // Set the token
+    req.token = bearerToken;
+    // Next middleware
+    next();
+  } else {
+    // Forbidden
+    res.sendStatus(403);
+  }
+
 }
