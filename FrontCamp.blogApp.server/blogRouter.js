@@ -1,6 +1,7 @@
 const express = require('express');
 const blogRouter = express.Router();
 const blogService = require('./blogService.js');
+const jwt = require('jsonwebtoken');
 
 blogRouter.get('/', function(req, res, next) {
     blogService.getAllArticles()
@@ -15,8 +16,11 @@ blogRouter.get('/:id', function(req, res, next) {
 });
 
 blogRouter.post('/', function(req, res, next) {
+    var decoded = jwt.decode(req.token, {complete: true});
+    let post = req.body;
+    post.author = decoded.payload.author;
     blogService.saveArticle(req.body)
-        .then(() => res.sendStatus(201))
+        .then((createdArticle) => res.json(createdArticle))
         .catch(err => handleError(err, next));
 });
 

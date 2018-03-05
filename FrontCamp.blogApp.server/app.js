@@ -39,12 +39,13 @@ function configureApp() {
   app.use(logRequest);
   app.use('/api', authRouter);
   app.all('/api/*', parseToken, (req, res, next) => {
-      jwt.verify(req.token, 'secretkey', (err, authData) => {
-      if(err) {
-        res.sendStatus(403);
-      } else {
-        next();
-      }
+    console.log('TOKEN' + req.token);
+      jwt.verify(req.token, 'frontcamp', (err, authData) => {
+        if(err) {
+          res.sendStatus(403);
+        } else {
+          next();
+        }
     });
   })
   app.use('/api/blogs', blogRouter);

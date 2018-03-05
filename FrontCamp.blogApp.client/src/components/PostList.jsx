@@ -14,7 +14,7 @@ class PostList extends Component {
 
   getPostItem(post) {
     return (
-      <div className="col s8 offset-s1 post-item" key={post.id}>
+      <div className="col s8 offset-s1 post-item" key={post._id}>
         <Post post={post} />
         <div className="post-action">
           <button className="waves-effect waves-light btn red lighten-1" onClick={() => this.handlePostDelete(post.id)}>Delete</button>

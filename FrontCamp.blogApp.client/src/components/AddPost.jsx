@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { addPost } from '../actions';
+import { Redirect } from "react-router-dom";
 
 class AddPost extends Component {
   constructor(props) {
@@ -21,6 +23,7 @@ class AddPost extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    this.initialPostCount = this.props.postCount;
 
     const title = this.state.title;
     const text = this.state.text;
@@ -33,16 +36,19 @@ class AddPost extends Component {
       title,
       text,
       tags: [...tagsSet],
-      date: new Date(),
-      author: this.props.author,
+      date: new Date()
     };
 
-    this.props.addPost(createdPost);
+    this.props.addPost(createdPost, this.props.token);
   }
 
   render() {
+    const isPostAdded = this.initialPostCount !== this.state.postCount;
+    const redirectIfAdded = (isPostAdded && <Redirect to={{pathname: "/blogs"}}/>);
+
     return (
       <section className="row">
+        {redirectIfAdded}
         <h2 className="subtitle">Create Post</h2>
         <form className="col s12" onSubmit={this.handleSubmit}>
           <div className="row">
@@ -76,6 +82,26 @@ class AddPost extends Component {
   }
 }
 
-AddPost = connect()(AddPost);
+function mapStateToProps(state) {
+  const postCount = state.posts.length;
+  const token = state.user.token;
+  return {
+    postCount,
+    token
+  };
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addPost: (user, token) => {
+      dispatch(addPost(user, token));
+    }
+  }
+};
+
+AddPost = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AddPost);
 
 export default AddPost;

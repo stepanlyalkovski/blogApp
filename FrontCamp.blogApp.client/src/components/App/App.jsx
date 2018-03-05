@@ -1,15 +1,11 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import './App.css';
-import VisiblePostList from '../../containers/VisiblePostList';
-import SearchBar from '../SearchBar.jsx';
-import AddPostContainer from '../../containers/AddPostContainer'
-import EditAuthor from '../EditAuthor.jsx';
-import SearchablePostList from '../FilterablePostList.jsx';
+import FilterablePostList from '../FilterablePostList.jsx';
 import Register from '../Register.jsx';
 import Login from '../Login.jsx';
 import Landing from '../Landing.jsx';
-
+import AddPost from '../AddPost.jsx';
 
 class App extends Component {
   constructor() {
@@ -65,7 +61,8 @@ class App extends Component {
               <Route exact path="/" component={Landing}/>
               <Route path="/register" component={Register}/>
               <Route path="/login" component={Login}/>
-              <Route path="/blogs" component={SearchablePostList}/>
+              <Route exact path="/blogs" component={FilterablePostList}/>
+              <Route path="/blogs/0" component={AddPost}/>
             </Switch>                                                
             </Router>
           </div>
