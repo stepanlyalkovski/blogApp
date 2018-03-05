@@ -19,6 +19,23 @@ export const addPost = (post, token) => {
   function failure(error) { return { type: 'ADD_POST_FAILURE', error } }
 };
 
+export const getPosts = (token) => {
+  return dispatch => {
+    apiService.getPosts(token)
+      .then(
+        posts => {
+          dispatch(success(posts));
+        },
+        error => {
+          dispatch(failure(error));
+        }
+      );
+  };
+
+  function success(posts) { return { type: 'ADD_POSTS', posts } }
+  function failure(error) { return { type: 'ADD_POSTS_FAILURE', error } }
+}
+
 export const deletePost = postId => {
   return {
     type: 'DELETE_POST',
@@ -65,3 +82,5 @@ export const login = user => {
   function success(user) { return { type: 'USER_LOGIN_SUCCESS', user } }
   function failure(error) { return { type: 'USER_LOGIN_FAILURE', error } }
 };
+
+export const setFilter = author => ({type: 'SET_FILTER_AUTHOR', author});

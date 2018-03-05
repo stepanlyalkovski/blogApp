@@ -5,6 +5,11 @@ const posts = (state = [], action) => {
         ...state,
         action.post
       ];
+    case 'ADD_POSTS':
+    return [
+      ...state,
+      ...action.posts
+    ];
     case 'DELETE_POST':
       return state.filter(s => s.id !== action.postId);
     default:

@@ -6,6 +6,7 @@ import Register from '../Register.jsx';
 import Login from '../Login.jsx';
 import Landing from '../Landing.jsx';
 import AddPost from '../AddPost.jsx';
+import Post from '../Post.jsx';
 
 class App extends Component {
   constructor() {
@@ -63,6 +64,7 @@ class App extends Component {
               <Route path="/login" component={Login}/>
               <Route exact path="/blogs" component={FilterablePostList}/>
               <Route path="/blogs/0" component={AddPost}/>
+              <Route path="/blogs/:id" component={Post}/>
             </Switch>                                                
             </Router>
           </div>

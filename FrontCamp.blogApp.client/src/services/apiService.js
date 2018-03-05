@@ -1,8 +1,13 @@
 import fetch from 'cross-fetch';
 
 class ApiService {
-  getBlogs() {
-    return fetch('/api/blogs/')
+  getPosts(token) {
+    return fetch('/api/blogs/', 
+      {
+        headers: {
+          'authorization': `bearer ${token}`
+        }
+      })
       .then(res => {
         ApiService.ensureSuccessStatusCode(res);
 
@@ -30,7 +35,7 @@ class ApiService {
         body: JSON.stringify(post)
       })
       .then(res => {
-        return;
+        return res.json();
       });
   }
 
