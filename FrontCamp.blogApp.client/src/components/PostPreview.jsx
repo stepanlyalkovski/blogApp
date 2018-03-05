@@ -5,6 +5,7 @@ class PostPreview extends Component {
     super(props);
     this.post = this.props.post;
     this.post.localDate = (new Date(this.post.date)).toLocaleDateString();
+    this.post.text = this.post.text.substring(0, 10) + '...';
   }
 
   render() {
