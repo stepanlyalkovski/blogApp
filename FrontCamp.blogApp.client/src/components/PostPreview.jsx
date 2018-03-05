@@ -5,7 +5,15 @@ class PostPreview extends Component {
     super(props);
     this.post = this.props.post;
     this.post.localDate = (new Date(this.post.date)).toLocaleDateString();
-    this.post.text = this.post.text.substring(0, 10) + '...';
+    this.previewText = this.getPreviewText(this.post.text);
+  }
+
+  getPreviewText(text) {
+    if (text.length <= 10) {
+      return text;
+    }
+
+    return text.substring(0, 10) + '...';
   }
 
   render() {
@@ -16,7 +24,7 @@ class PostPreview extends Component {
             <h1 className="card-title">{this.post.title}</h1>
             <p className="post-date">Posted at <time dateTime={this.post.date}>{this.post.localDate}</time></p>
           </header>
-          <p className="card-content">{this.post.text}</p>
+          <p className="card-content">{this.previewText}</p>
           <div className="post-tag-list">
             {this.post.tags.map(tag => <span key={tag} className='chip'>{tag}</span>)}
           </div>

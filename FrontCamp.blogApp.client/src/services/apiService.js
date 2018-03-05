@@ -39,6 +39,19 @@ class ApiService {
       });
   }
 
+  deletePost(postId, token) {
+    return fetch(`/api/blogs/${postId}`,
+      {
+        method: "DELETE",
+        headers: {
+          'authorization': `bearer ${token}`
+        }
+      }).then((res) => {
+        ApiService.ensureSuccessStatusCode(res);
+        return res;
+      });
+  }
+
   register(user) {
     return fetch("/api/register",
       {

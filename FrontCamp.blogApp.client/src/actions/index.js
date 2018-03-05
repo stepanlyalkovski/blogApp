@@ -34,13 +34,23 @@ export const getPosts = (token) => {
 
   function success(posts) { return { type: 'ADD_POSTS', posts } }
   function failure(error) { return { type: 'ADD_POSTS_FAILURE', error } }
-}
+};
 
-export const deletePost = postId => {
-  return {
-    type: 'DELETE_POST',
-    postId
-  }
+export const deletePost = (postId, token) => {
+  return dispatch => {
+    apiService.deletePost(postId, token)
+      .then(
+        () => {
+          dispatch(success(postId));
+        },
+        error => {
+          dispatch(failure(error));
+        }
+      );
+  };
+
+  function success(postId) { return { type: 'DELETE_POST', postId } }
+  function failure(error) { return { type: 'DELETE_POST_FAILURE', error } }
 };
 
 export const register = user => {
@@ -82,5 +92,7 @@ export const login = user => {
   function success(user) { return { type: 'USER_LOGIN_SUCCESS', user } }
   function failure(error) { return { type: 'USER_LOGIN_FAILURE', error } }
 };
+
+export const logout = () => ({type: 'USER_LOGOUT'});
 
 export const setFilter = author => ({type: 'SET_FILTER_AUTHOR', author});

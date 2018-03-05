@@ -33,6 +33,12 @@ const user = (state = {}, action) => {
         inProgress: false,
         error: action.error
       };
+    case 'USER_LOGOUT':
+      return {
+        isLoggedIn: false,
+        token: undefined,
+        author: undefined
+      };
     default:
       return state;
   }

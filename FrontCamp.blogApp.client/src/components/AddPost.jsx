@@ -10,6 +10,7 @@ class AddPost extends Component {
 
     this.textMaxLength = 300;
     this.titleMaxLength = 30;
+    this.initialPostCount = this.props.postCount;
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
@@ -23,7 +24,6 @@ class AddPost extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.initialPostCount = this.props.postCount;
 
     const title = this.state.title;
     const text = this.state.text;
@@ -43,7 +43,7 @@ class AddPost extends Component {
   }
 
   render() {
-    const isPostAdded = this.initialPostCount !== this.state.postCount;
+    const isPostAdded = this.initialPostCount !== this.props.postCount;
     const redirectIfAdded = (isPostAdded && <Redirect to={{pathname: "/blogs"}}/>);
 
     return (

@@ -33,9 +33,22 @@ blogRouter.put('/:id', function(req, res, next) {
 });
 
 blogRouter.delete('/:id', function(req, res, next) {
-    blogService.deleteArticle(req.params.id)
+    console.log('delete');    
+    let decoded = jwt.decode(req.token, {complete: true});
+    let author = decoded.payload.author;
+    console.log(req.params.id);
+    blogService.getArticle(req.params.id)
+    .then(article => {
+        console.log('blog author ' + article.author);
+        console.log('author ' + author);
+       if (article.author !== author) {
+            res.sendStatus(403);
+       } else {
+        blogService.deleteArticle(req.params.id)
         .then(() => res.sendStatus(200))
         .catch(err => handleError(err, next));
+       }
+    })
 });
 
 function handleError(err, next) {

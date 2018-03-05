@@ -6,9 +6,14 @@ class Landing extends Component {
         return (
             <div>
               <h1>Landing page</h1>
-                <Link to={'/register'}>Sign up</Link>
-                <br/>
-                <Link to={'/login'}>Sign in</Link>
+              <div className="row">
+                <div className="col s4">
+                  <Link className="waves-effect waves-light btn" to={'/register'}>Sign up</Link>
+                </div>
+                <div className="col s4">
+                  <Link className="waves-effect waves-light btn" to={'/login'}>Sign in</Link>
+                </div>
+              </div>
             </div>
         );
     }

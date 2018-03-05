@@ -8,7 +8,7 @@ const filterPosts = (posts, filter) => {
   } 
 
   return posts;
-}
+};
 
 const mapDispatchToProps = dispatch => {
   return {

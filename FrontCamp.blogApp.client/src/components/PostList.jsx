@@ -11,7 +11,9 @@ class PostList extends Component {
   }
 
   componentDidMount() {
-    this.props.getPosts(this.props.token);
+    if(this.props.posts.length <= 1) {
+      this.props.getPosts(this.props.token);
+    }
   }
 
   handlePostDelete(postId) {

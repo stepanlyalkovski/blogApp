@@ -7,11 +7,10 @@ const posts = (state = [], action) => {
       ];
     case 'ADD_POSTS':
     return [
-      ...state,
       ...action.posts
     ];
     case 'DELETE_POST':
-      return state.filter(s => s.id !== action.postId);
+      return state.filter(s => s._id !== action.postId);
     default:
       return state;
   }
