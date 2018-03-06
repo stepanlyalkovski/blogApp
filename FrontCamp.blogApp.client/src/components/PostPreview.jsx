@@ -9,11 +9,11 @@ class PostPreview extends Component {
   }
 
   getPreviewText(text) {
-    if (text.length <= 10) {
+    if (text.length <= 30) {
       return text;
     }
 
-    return text.substring(0, 10) + '...';
+    return text.substring(0, 30) + '...';
   }
 
   render() {

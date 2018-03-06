@@ -5,13 +5,16 @@ class Landing extends Component {
     render() {
         return (
             <div>
-              <h1>Landing page</h1>
               <div className="row">
-                <div className="col s4">
-                  <Link className="waves-effect waves-light btn" to={'/register'}>Sign up</Link>
-                </div>
-                <div className="col s4">
-                  <Link className="waves-effect waves-light btn" to={'/login'}>Sign in</Link>
+                <div className="col s8 offset-s4">
+                  <div className="row">
+                    <div className="col s4">
+                      <Link className="waves-effect waves-light btn btn-large" to={'/register'}>Sign up</Link>
+                    </div>
+                    <div className="col s4">
+                      <Link className="waves-effect waves-light btn btn-large" to={'/login'}>Sign in</Link>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

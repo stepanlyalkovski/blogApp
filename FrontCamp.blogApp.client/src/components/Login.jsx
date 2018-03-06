@@ -40,7 +40,7 @@ class Login extends Component {
                         Password
                         <input type="password" ref="password" required/>
                     </label>
-                    <button type="submit">Sign in</button>
+                    <button type="submit" className="waves-effect waves-light btn green lighten-1">Sign in</button>
                 </form>
             </div>
         );

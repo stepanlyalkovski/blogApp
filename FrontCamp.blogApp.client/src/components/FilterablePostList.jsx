@@ -4,10 +4,16 @@ import VisiblePostList from '../containers/VisiblePostList';
 import { Link } from "react-router-dom";
 
 const FilterablePostList = () => (
-  <div className="col s8 offset-s1">
-    <Link to={'/blogs/0'}>Add Post</Link>
-    <SearchBar />
-    <VisiblePostList/>
+  <div className="col s11">
+    <div className="row">
+      <div className="col s4">
+        <SearchBar />
+        <Link to={'/blogs/0'} className="waves-effect waves-light btn green lighten-1">Add Post</Link>
+      </div>
+      <div className="col s8">
+        <VisiblePostList/>
+      </div>
+    </div>
   </div>
 );
 

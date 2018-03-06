@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { deletePost} from '../actions';
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 
 class Post extends Component {
   constructor(props, t) {
@@ -13,13 +13,15 @@ class Post extends Component {
   }
 
   handleDeletePost() {
-    this.props.deletePost(this.props.post._id, this.props.token);
+    this.props.deletePost(this.props.post._id, this.props.user.token);
   }
 
   render() {
     const post = this.props.post;
     const isPostDeleted = this.initialPostCount !== this.props.postCount;
+    const isAbleToDelete = post && this.props.user.author === post.author;
     const redirectIfDeleted = (isPostDeleted && <Redirect to={{pathname: "/blogs"}}/>);
+    const deleteButton = (isAbleToDelete && <button className="waves-effect red lighten-1 btn" onClick={this.handleDeletePost}>Delete</button>);
     const postArticle = ( !isPostDeleted &&
       <article className="card grey lighten-5 z-depth-3 post">
       <div className="card-content">
@@ -37,11 +39,23 @@ class Post extends Component {
       </div>
     </article>
     );
+    
     return (
       <div>
         {redirectIfDeleted}
-        {postArticle}
-        <button onClick={this.handleDeletePost}>Delete</button>
+        <div className="row">
+          <div className="col s8 offset-s2">
+            {postArticle}
+          <div className="row">
+          <div className="col s3">
+            <Link to={'/blogs'} className="waves-effect grey btn">Back to blogs</Link>
+          </div>
+          <div className="col s3">
+            {deleteButton}
+          </div>
+        </div>
+          </div>
+        </div>
       </div>
     );
   }
@@ -51,10 +65,10 @@ const mapStateToProps = (state, ownProps) => {
   const postId = ownProps.match.params.id;
   const post = state.posts.find(p => p._id === postId);
   const postCount = state.posts.length;
-  const token = state.user.token;
+  const user = state.user;
   return {
     post,
-    token,
+    user,
     postCount
   };
 };

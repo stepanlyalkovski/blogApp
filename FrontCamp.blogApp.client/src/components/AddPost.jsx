@@ -8,7 +8,7 @@ class AddPost extends Component {
     super(props);
     this.state = {};
 
-    this.textMaxLength = 300;
+    this.textMaxLength = 3000;
     this.titleMaxLength = 30;
     this.initialPostCount = this.props.postCount;
 

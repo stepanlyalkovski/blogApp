@@ -1,4 +1,15 @@
-import fetch from 'cross-fetch';
+import { fetch as fetchOrigin } from 'cross-fetch';
+
+const delayHandler = {
+  apply: function(target, thisArg, argumentList) {
+    return new Promise((resolve) => setTimeout(resolve,700))
+    .then(() => {
+      return target(...argumentList);
+    });
+  }
+}
+
+const fetch = new Proxy(fetchOrigin, delayHandler);
 
 class ApiService {
   getPosts(token) {

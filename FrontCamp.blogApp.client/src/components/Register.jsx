@@ -45,7 +45,7 @@ class Register extends Component {
                         Password
                         <input type="password" ref="password" required/>
                     </label>
-                    <button type="submit">Register</button>
+                    <button type="submit" className="waves-effect waves-light btn green lighten-1">Register</button>
                 </form>
             </div>
         );

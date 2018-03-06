@@ -3,14 +3,16 @@ import apiService from "../services/apiService";
 
 export const addPost = (post, token) => {
   return dispatch => {
-
+    dispatch(startRequest());
     apiService.addPost(post, token)
       .then(
         post => {
           dispatch(success(post));
+          dispatch(endRequest());
         },
         error => {
           dispatch(failure(error));
+          dispatch(endRequest());
         }
       );
   };
@@ -21,13 +23,16 @@ export const addPost = (post, token) => {
 
 export const getPosts = (token) => {
   return dispatch => {
+    dispatch(startRequest());
     apiService.getPosts(token)
       .then(
         posts => {
           dispatch(success(posts));
+          dispatch(endRequest());
         },
         error => {
           dispatch(failure(error));
+          dispatch(endRequest());
         }
       );
   };
@@ -38,13 +43,16 @@ export const getPosts = (token) => {
 
 export const deletePost = (postId, token) => {
   return dispatch => {
+    dispatch(startRequest());
     apiService.deletePost(postId, token)
       .then(
         () => {
           dispatch(success(postId));
+          dispatch(endRequest());
         },
         error => {
           dispatch(failure(error));
+          dispatch(endRequest());
         }
       );
   };
@@ -55,15 +63,16 @@ export const deletePost = (postId, token) => {
 
 export const register = user => {
   return dispatch => {
-    dispatch(request(user));
-
+    dispatch(startRequest());
     apiService.register(user)
       .then(
         user => {
           dispatch(success(user));
+          dispatch(endRequest());
         },
         error => {
           dispatch(failure(error));
+          dispatch(endRequest());
         }
       );
 
@@ -75,15 +84,16 @@ export const register = user => {
 
 export const login = user => {
   return dispatch => {
-    dispatch(request(user));
-
+    dispatch(startRequest());
     apiService.login(user)
       .then(
         user => {
           dispatch(success(user));
+          dispatch(endRequest());
         },
         error => {
-          dispatch(failure(error));
+          dispatch(failure(error));          
+          dispatch(endRequest());
         }
       );
   };
@@ -96,3 +106,6 @@ export const login = user => {
 export const logout = () => ({type: 'USER_LOGOUT'});
 
 export const setFilter = author => ({type: 'SET_FILTER_AUTHOR', author});
+
+function startRequest() { return { type: 'FETCH_START' } }
+function endRequest() { return { type: 'FETCH_END' } }

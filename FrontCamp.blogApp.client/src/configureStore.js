@@ -18,12 +18,13 @@ const configureStore = () => {
 
   store.subscribe(() => {
     const initialToken = persistedState && persistedState.token;
-    const userToken = store.getState().user.token;
+    const stateUser = store.getState().user;
+    const userToken = stateUser.token;
     if(initialToken !== undefined && userToken !== undefined && initialToken === userToken) {
       return;
     }
 
-    saveState({user: {token: userToken}});
+    saveState({user: {token: userToken, author: stateUser.author }});
   });
 
   return store;
