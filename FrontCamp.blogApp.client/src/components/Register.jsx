@@ -30,7 +30,8 @@ class Register extends Component {
         );
 
         return (
-            <div>
+            <div className="row">
+              <div className="col s5 push-s3">
                 {redirectIfRegistered}
                 <form onSubmit={this.handleSubmit}>
                     <label>
@@ -47,6 +48,7 @@ class Register extends Component {
                     </label>
                     <button type="submit" className="waves-effect waves-light btn green lighten-1">Register</button>
                 </form>
+              </div>
             </div>
         );
     }

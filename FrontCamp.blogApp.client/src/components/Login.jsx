@@ -29,7 +29,8 @@ class Login extends Component {
       );
 
         return (
-            <div>
+            <div className="row">
+              <div className="col s5 push-s3">
                 {redirectIfLoggedIn}
                 <form onSubmit={this.handleSubmit}>
                     <label>
@@ -42,6 +43,7 @@ class Login extends Component {
                     </label>
                     <button type="submit" className="waves-effect waves-light btn green lighten-1">Sign in</button>
                 </form>
+              </div>
             </div>
         );
     }
