@@ -578,3 +578,5 @@
 {"url":"/api/blogs/","method":"GET","date":"3/6/2018, 1:52:56 PM","level":"info","message":"request recieved"}
 {"url":"/api/blogs/","method":"POST","date":"3/6/2018, 1:53:32 PM","level":"info","message":"request recieved"}
 {"url":"/api/blogs/5a9e732c92c069b3449e062e","method":"DELETE","date":"3/6/2018, 1:53:44 PM","level":"info","message":"request recieved"}
+{"url":"/","method":"GET","date":"2018-4-2 21:30:14","level":"info","message":"request recieved"}
+{"url":"/favicon.ico","method":"GET","date":"2018-4-2 21:30:16","level":"info","message":"request recieved"}
