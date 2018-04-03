@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { Link } from "react-router-dom";
 
 const Spinner = () => {
     return (
-        <div className="spinner">
+        <div id="spinner" className="spinner">
             <div className="spinner-inner">
                 <div className="preloader-wrapper big active">
                     <div className="spinner-layer spinner-blue-only">

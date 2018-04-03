@@ -107,5 +107,5 @@ export const logout = () => ({type: 'USER_LOGOUT'});
 
 export const setFilter = author => ({type: 'SET_FILTER_AUTHOR', author});
 
-function startRequest() { return { type: 'FETCH_START' } }
-function endRequest() { return { type: 'FETCH_END' } }
+export const startRequest = () => ({ type: 'FETCH_START' });
+export const endRequest = () => ({ type: 'FETCH_END' });
