@@ -9,7 +9,7 @@ describe('Posts Reducer', () => {
 
   it('can handle ADD_POST', () => {
     let firstAddedPost = {text:'testText', title: 'testTitle'};
-    expect(posts(undefined, {type:'ADD_POST', post: firstAddedPost})).toEqual([firstAddedPost]);
+    expect(posts([], {type:'ADD_POST', post: firstAddedPost})).toEqual([firstAddedPost]);
   });
 
   it('can handle DELETE_POST', () => {
